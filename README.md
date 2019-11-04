@@ -1,0 +1,2 @@
+# MIT_LECTURES_CODE_PRACTICE
+practicing MIT 6.006
