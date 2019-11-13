@@ -1,11 +1,6 @@
+#include "stack.h"
 #include<stdio.h>
 #include<stdlib.h>
-
-typedef struct{
-unsigned int size;
-int *list;
-int top;
-}stack;
 
 void initialize_stack(stack *stack,unsigned int size)
 {
@@ -57,8 +52,14 @@ int pop(stack *stack, int *value)
     return 0;    
 }
 
+void destroy_stack(stack *stack)
+{
+    free(stack->list);
+    return;
+}
 
-int main()
+
+/*int main()
 {
     stack stack;
     initialize_stack(&stack, 10);
@@ -70,4 +71,4 @@ int main()
     }
     printf("\n");
     return 0;   
-}
+}*/

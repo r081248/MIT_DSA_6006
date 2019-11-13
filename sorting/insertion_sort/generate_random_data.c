@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 		srand(time(NULL));
 		for(long int j=0;j<num_values;++j)
 		{
-			fprintf(fp,"%ld ", random());
+			fprintf(fp,"%ld ", rand()%num_values);
 		}
 		fprintf(fp, "\n");
 	}

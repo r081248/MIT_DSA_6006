@@ -17,17 +17,18 @@ void insertion_sort(long *list, long size)
 	}
 }
 
-void print_list(long *list, long size)
+void print_list(long *list, long size, FILE *fp)
 {
 	for(long i=0; i<size; ++i)
 	{
-		printf("%ld ",list[i]);
+		fprintf(fp,"%ld ",list[i]);
 	}
-	printf("\n");	
+	fprintf(fp,"\n");	
 }
 
 int main()
 {
+	FILE *sorted_data = fopen("sorted_data","w");
 	long num_cases,*list;
 	scanf("%ld",&num_cases);
 	for(long i=0;i<num_cases;++i)
@@ -44,9 +45,9 @@ int main()
 		t = clock() - t;
 		double time_taken = (double)t/CLOCKS_PER_SEC;
 		printf("time_taken to sort %ld elements is %lf\n",num_values,time_taken);
-		print_list(list,num_values);
+		print_list(list,num_values,sorted_data);
 		free(list);
 	}
-
+	fclose(sorted_data);
 	return 0;
 }
