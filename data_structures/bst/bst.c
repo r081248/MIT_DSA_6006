@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include"bst.h"
 
-bst *get_min_key_node(bst *root)
+bst *get_min_key_node(bst *root)//Gets the minimum key in the subtree and returns its node address
 {
     if(root->left)
     {
@@ -10,7 +10,7 @@ bst *get_min_key_node(bst *root)
     }
     return root;
 }
-void inorder(bst *root)
+void inorder(bst *root)//Inorder traversal(left node, parent, right node)
 {
     if(root)
     {
@@ -29,7 +29,7 @@ bst *new_node(int key)
     return node;
 }
 
-bst *insert(bst *node, int key)
+bst *insert(bst *node, int key)//Insert the node and returns its address
 {
     if(node == NULL)
     {
@@ -46,7 +46,7 @@ bst *insert(bst *node, int key)
     return node;
 }
 
-bst *search(bst *node, int key)
+bst *search(bst *node, int key) // returns root adress if key matches and null if key is not found
 {
     if(node == NULL)
     {
@@ -67,9 +67,9 @@ bst *search(bst *node, int key)
     
 }
 
-bst *delete(bst *root, int key)
+bst *delete(bst *root, int key)//performs delete operation and returns root address(which will be modified in some cases)
 {
-    if(!root)
+    if(!root)//if tree is nill
     {
         return root;
     }
@@ -83,23 +83,23 @@ bst *delete(bst *root, int key)
     }
     else
     {
-        if(root->left == NULL)
+        if(root->left == NULL) // Left node absent or both nodes absent
         {
             bst *temp = root->right;
             free(root);
             return temp;
         }
-        else if(root->right == NULL)
+        else if(root->right == NULL) //Right node absent or both nodes absent
         {
             bst *temp = root->left;
             free(root);
             return temp;
         }
-        else
+        else// When 2 nodes are present
         {
             bst *temp = get_min_key_node(root->right);
-            root->key = temp->key;
-            root->right = delete(root->right, temp->key);
+            root->key = temp->key;//copying the contents of least minimum key from the right subtree
+            root->right = delete(root->right, temp->key);//Deleting the lest minimum key from the right subtree
         }
         
     }
