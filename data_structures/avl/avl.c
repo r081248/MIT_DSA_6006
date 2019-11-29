@@ -37,7 +37,16 @@ void preOrder(avl *root)
     }
 }
 
-avl *rightRotation(avl *z)
+/*
+             z
+            /\          Right Rotation
+           y T4        ==============>                   y           
+          /\                                          /    \  
+         x T3                                        x      z 
+        /\                                          / \    / \        
+       T1 T2                                       T1 T2 T3  T4
+*/
+avl *rightRotation(avl *z)  
 {
     avl *y = z->left;
     avl *T3 = y->right;
@@ -50,6 +59,8 @@ avl *rightRotation(avl *z)
 
     return y;
 }
+
+
 
 avl *leftRotation(avl *z)
 {
@@ -81,15 +92,15 @@ avl *getMinKeyNode(avl *root)
 
 avl *insertion(avl *root, int key)
 {
-    if(root == NULL)
+    if(root == NULL) // Insertion 
     {
-        return newNode(key);
+        return newNode(key); // create new node with key
     }
-    else if(key < root->key)
+    else if(key < root->key) // Traverse left
     {
         root->left = insertion(root->left, key);
     }
-    else if(key > root->key)
+    else if(key > root->key) // Traverse right
     {
         root->right = insertion(root->right, key);   
     }
@@ -98,27 +109,27 @@ avl *insertion(avl *root, int key)
         return root;
     }
 
-    root->height = 1 + maxHeight(root->left, root->right);
+    root->height = 1 + maxHeight(root->left, root->right); // Update the height of the ancestor below which insertion is done
 
-    int balance = balanceFactor(root->left, root->right);
+    int balance = balanceFactor(root->left, root->right); // Check if AVL balance factor is violated
 
-    if(balance>1 && key < root->left->key)
+    if(balance>1 && key < root->left->key) // Left sub tree is heavy and left-left insertion scenario
     {
-        return rightRotation(root); 
+        return rightRotation(root); // Perform right rotation
     }
-    else if(balance<-1 && key > root->right->key )
+    else if(balance<-1 && key > root->right->key ) // Right sub tree is heavy and right-right insertion scenario
     {
-        return leftRotation(root);
+        return leftRotation(root); // Perform left Rotation
     }
-    else if(balance>1 && key > root->left->key)
+    else if(balance>1 && key > root->left->key) // Left Sub tree is heavy and left-right insertion scenario
     {
-        root->left = leftRotation(root->left);
-        return rightRotation(root);
+        root->left = leftRotation(root->left); // Left Rotation
+        return rightRotation(root); //Right rotation
     }
-    else if(balance<-1 && key < root->right->key)
+    else if(balance<-1 && key < root->right->key) // Right Sub tree is heavy and right-left insertion scenario
     {
-        root->right = rightRotation(root->right);
-        return leftRotation(root);
+        root->right = rightRotation(root->right); //Right rotation
+        return leftRotation(root); // Left Rotation
     }
 
     return root;
