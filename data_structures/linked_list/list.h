@@ -15,10 +15,11 @@ template<typename T>
 class list
 {
 public:
-    list(){};
+    list():m_data{nullptr}{};
     bool insert(T value);
-    bool delete(T value);
-
+    bool deletion(T value);
+    void printList();
+    ~list();
 private:
     node<T> *createNode(T value, node<T>*next);
     node<T> *m_data;
