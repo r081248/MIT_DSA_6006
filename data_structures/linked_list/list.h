@@ -54,6 +54,7 @@ public:
             node *currentNode;
     };
 
+
 private:
     node* m_data;
 
