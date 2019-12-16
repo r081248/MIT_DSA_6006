@@ -1,3 +1,5 @@
+#ifndef QUEUE_H
+#define QUEUE_H
 template<typename T>
 class queue
 {
@@ -14,3 +16,4 @@ private:
     int m_size;
     T *m_data;
 };
+#endif
