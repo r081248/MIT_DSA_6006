@@ -5,10 +5,10 @@ public:
     queue(int size);
     void enqueue(T key);//Throws exception
     T dequeue();//Throws exception
-    ~queue();
-private:
     bool isQueueFull();
     bool isQueueEmpty();
+   ~queue();
+private:
     int m_front;
     int m_rear;
     int m_size;
